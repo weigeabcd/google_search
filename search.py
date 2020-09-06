@@ -85,7 +85,7 @@ def google_search_by_keyword(keyword):
                 if find_status:
                     # 记录下找到的信息内容
                     start_content = "，".join(random_url_list)
-                    contents = find_time+" 搜索关键词："+keyword+" 在第"+str(i+1)+"页找到目标站点："+url+"。随机点击网站信息："+start_content+"\n"
+                    contents = find_time+" 使用代理："+daili_ip+"，搜索关键词："+keyword+" 在第"+str(i+1)+"页找到目标站点："+url+"。随机点击网站信息："+start_content+"\n"
                     save("info.txt", contents)
                     break
                 else:
@@ -98,10 +98,11 @@ def google_search_by_keyword(keyword):
 
 
 def main():
-    keyword_list = render_txt_to_list("keywords.txt")
-    for keyword in keyword_list:
-        keyword = keyword.strip()
-        google_search_by_keyword(keyword)
+    for i in range(30):
+        keyword_list = render_txt_to_list("keywords.txt")
+        for keyword in keyword_list:
+            keyword = keyword.strip()
+            google_search_by_keyword(keyword)
 
 
 main()
