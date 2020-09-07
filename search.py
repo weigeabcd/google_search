@@ -1,4 +1,3 @@
-# coding=gbk
 
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,6 +9,7 @@ import random
 import requests
 import re
 import datetime
+from fake_useragent import UserAgent
 
 def save(filename, contents):
     fh = open(filename, 'a', encoding='utf-8')
@@ -39,11 +39,15 @@ def proxy_ip():
     else:
         return ''
 
+def get_random():
+    return UserAgent().random
 
 def google_search_by_keyword(keyword):
     chromeOptions = webdriver.ChromeOptions()
     daili_ip = proxy_ip()
     chromeOptions.add_argument("--proxy-server=http://" + daili_ip)
+    ua = get_random()
+    chromeOptions.add_argument('User-Agent=' + ua)
     browser = webdriver.Chrome(chrome_options=chromeOptions)
     try:
         browser.maximize_window()
