@@ -30,7 +30,8 @@ def render_txt_to_list(files):
         return data
 
 def proxy_ip():
-    ip_url = "https://www.cloudam.cn/ip/takeip/5f2115d50bbfc4ec91b16c47?protocol=proxy&regionid=us&needpwd=false&duplicate=true&amount=1&type=text"
+    # ip_url = "https://www.cloudam.cn/ip/takeip/5f2115d50bbfc4ec91b16c47?protocol=proxy&regionid=us&needpwd=false&duplicate=true&amount=1&type=text"
+    ip_url = "https://www.cloudam.cn/ip/takeip/a5ETdYkhE4UdUaAFhyCTNQ0Trozn3OWe?protocol=proxy&regionid=us&needpwd=false&duplicate=true&amount=1&type=text"
     res = requests.get(ip_url)
     if res.status_code == 200:
         print(res.text)
@@ -65,7 +66,7 @@ def google_search_by_keyword(keyword):
                     url = a_link.find_element_by_css_selector("a").get_attribute('href')
                     # print(url)
                     if "https://en.imsilkroad.com" in url:
-                        print("´æÔÚ", url)
+                        print("å­˜åœ¨", url)
                         find_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                         a_link.find_element_by_css_selector("a").click()
                         sleep(3)
@@ -73,19 +74,19 @@ def google_search_by_keyword(keyword):
                         for j in range(3):
                             url_list = re_finall_target_url(browser.page_source)
                             random_url = url_list[random.randint(0, len(url_list))]
-                            print("Ëæ»úµØÖ·£º", random_url)
+                            print("éšæœºåœ°å€ï¼š", random_url)
                             browser.get(random_url)
                             start_time = random.randint(20,40)
                             sleep(start_time)
-                            random_url_content = random_url+"-Í£ÁôÁË£º"+str(start_time)+"Ãë"
+                            random_url_content = random_url+"-åœç•™äº†ï¼š"+str(start_time)+"ç§’"
                             random_url_list.append(random_url_content)
 
                         find_status = True
                         break
                 if find_status:
-                    # ¼ÇÂ¼ÏÂÕÒµ½µÄĞÅÏ¢ÄÚÈİ
-                    start_content = "£¬".join(random_url_list)
-                    contents = find_time+" Ê¹ÓÃ´úÀí£º"+daili_ip+"£¬ËÑË÷¹Ø¼ü´Ê£º"+keyword+" ÔÚµÚ"+str(i+1)+"Ò³ÕÒµ½Ä¿±êÕ¾µã£º"+url+"¡£Ëæ»úµã»÷ÍøÕ¾ĞÅÏ¢£º"+start_content+"\n"
+                    # è®°å½•ä¸‹æ‰¾åˆ°çš„ä¿¡æ¯å†…å®¹
+                    start_content = "ï¼Œ".join(random_url_list)
+                    contents = find_time+" ä½¿ç”¨ä»£ç†ï¼š"+daili_ip+"ï¼Œæœç´¢å…³é”®è¯ï¼š"+keyword+" åœ¨ç¬¬"+str(i+1)+"é¡µæ‰¾åˆ°ç›®æ ‡ç«™ç‚¹ï¼š"+url+"ã€‚éšæœºç‚¹å‡»ç½‘ç«™ä¿¡æ¯ï¼š"+start_content+"\n"
                     save("info.txt", contents)
                     break
                 else:
@@ -98,7 +99,7 @@ def google_search_by_keyword(keyword):
 
 
 def main():
-    for i in range(30):
+    for i in range(10):
         keyword_list = render_txt_to_list("keywords.txt")
         for keyword in keyword_list:
             keyword = keyword.strip()
