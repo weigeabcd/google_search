@@ -44,9 +44,9 @@ def get_random():
 
 def google_search_by_keyword(keyword):
     chromeOptions = webdriver.ChromeOptions()
-    # daili_ip="1"
-    daili_ip = proxy_ip()
-    chromeOptions.add_argument("--proxy-server=http://" + daili_ip)
+    daili_ip="1"
+    # daili_ip = proxy_ip()
+    # chromeOptions.add_argument("--proxy-server=http://" + daili_ip)
     ua = get_random()
     chromeOptions.add_argument('User-Agent=' + ua)
     browser = webdriver.Chrome(chrome_options=chromeOptions)
