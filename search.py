@@ -44,6 +44,7 @@ def get_random():
 
 def google_search_by_keyword(keyword):
     chromeOptions = webdriver.ChromeOptions()
+    # daili_ip="1"
     daili_ip = proxy_ip()
     chromeOptions.add_argument("--proxy-server=http://" + daili_ip)
     ua = get_random()
@@ -63,9 +64,12 @@ def google_search_by_keyword(keyword):
         # print(html)
         find_status = False
         for i in range(10):
-            inpup_box = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'G0iuSb')))
+            # print("000")
+            inpup_box = wait.until(EC.presence_of_element_located((By.ID, 'pnnext')))
+            # print(inpup_box)
             if inpup_box:
                 a_link_list = browser.find_elements_by_xpath('//div[@class="g"]/div/div[@class="r"]')
+                # print(a_link_list)
                 for a_link in a_link_list:
                     url = a_link.find_element_by_css_selector("a").get_attribute('href')
                     # print(url)
@@ -97,7 +101,7 @@ def google_search_by_keyword(keyword):
                     browser.find_element_by_id("pnnext").click()
                     sleep(1)
     except Exception as e:
-        print(e)
+        print(e,"1")
     browser.close()
     browser.quit()
 
