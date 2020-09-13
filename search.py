@@ -17,7 +17,7 @@ def save(filename, contents):
     fh.close()
 
 def re_finall_target_url(html):
-    url_list = re.findall(r'<a href="(https://en.imsilkroad.com.*?)"', html)
+    url_list = re.findall(r'<a href="(https://www.imsilkroad.com.*?)"', html)
     if url_list:
         return url_list
     else:
@@ -44,9 +44,9 @@ def get_random():
 
 def google_search_by_keyword(keyword):
     chromeOptions = webdriver.ChromeOptions()
-    daili_ip="1"
-    # daili_ip = proxy_ip()
-    # chromeOptions.add_argument("--proxy-server=http://" + daili_ip)
+    # daili_ip="1"
+    daili_ip = proxy_ip()
+    chromeOptions.add_argument("--proxy-server=http://" + daili_ip)
     ua = get_random()
     chromeOptions.add_argument('User-Agent=' + ua)
     browser = webdriver.Chrome(chrome_options=chromeOptions)
@@ -63,7 +63,7 @@ def google_search_by_keyword(keyword):
         # html = browser.page_source
         # print(html)
         find_status = False
-        for i in range(10):
+        for i in range(9):
             # print("000")
             inpup_box = wait.until(EC.presence_of_element_located((By.ID, 'pnnext')))
             # print(inpup_box)
@@ -73,7 +73,7 @@ def google_search_by_keyword(keyword):
                 for a_link in a_link_list:
                     url = a_link.find_element_by_css_selector("a").get_attribute('href')
                     # print(url)
-                    if "https://en.imsilkroad.com" in url:
+                    if "www.imsilkroad.com" in url:
                         print("存在", url)
                         find_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                         a_link.find_element_by_css_selector("a").click()
@@ -107,7 +107,7 @@ def google_search_by_keyword(keyword):
 
 
 def main():
-    for i in range(10):
+    for i in range(30):
         keyword_list = render_txt_to_list("keywords.txt")
         for keyword in keyword_list:
             keyword = keyword.strip()
