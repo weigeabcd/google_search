@@ -1,4 +1,4 @@
-
+# coding="utf-8"
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -44,11 +44,11 @@ def get_random():
 
 def google_search_by_keyword(keyword):
     chromeOptions = webdriver.ChromeOptions()
-    # daili_ip="1"
+    daili_ip="1"
     daili_ip = proxy_ip()
     chromeOptions.add_argument("--proxy-server=http://" + daili_ip)
-    ua = get_random()
-    chromeOptions.add_argument('User-Agent=' + ua)
+    # ua = get_random()
+    # chromeOptions.add_argument('User-Agent=' + ua)
     browser = webdriver.Chrome(chrome_options=chromeOptions)
     try:
         browser.maximize_window()
@@ -77,13 +77,20 @@ def google_search_by_keyword(keyword):
                         print("存在", url)
                         find_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                         a_link.find_element_by_css_selector("a").click()
-                        sleep(3)
                         random_url_list = []
                         for j in range(3):
-                            url_list = re_finall_target_url(browser.page_source)
-                            random_url = url_list[random.randint(0, len(url_list))]
-                            print("随机地址：", random_url)
+                            wait.until(EC.presence_of_element_located((By.TAG_NAME, 'a')))
+                            # url_list = re_finall_target_url(browser.page_source)
+                            # random_url = url_list[random.randint(0, len(url_list))]
+                            # print("随机地址：", random_url)
+                            # browser.get(random_url)
+                            links = browser.find_elements_by_css_selector("a")
+                            # print(links)
+                            l = links[random.randint(0, len(links) - 1)]
+                            random_url = l.get_attribute("href")
+                            # print(random_url)
                             browser.get(random_url)
+
                             start_time = random.randint(20,40)
                             sleep(start_time)
                             random_url_content = random_url+"-停留了："+str(start_time)+"秒"
